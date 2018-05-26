@@ -1,0 +1,110 @@
+{
+  "name": "twitter-query-engine",
+  "version": "0.0.7",
+  "description": "React Redux & Hapi based Twitter Query Engine",
+  "main": "src/server/start.js",
+  "keywords": [
+    "react",
+    "hapi",
+    "heroku",
+    "eslint",
+    "pm2",
+    "material",
+    "material ui",
+    "ES6",
+    "ES2015",
+    "webpack",
+    "hot-reload",
+    "design",
+    "twitter",
+    "streaming",
+    "socke.io"
+  ],
+  "engines": {
+    "node": "8.x",
+    "npm": ">= 5"
+  },
+  "scripts": {
+    "start": "pm2 start src/server/start.js --name react-redux-hapi-fullstack-starter --watch --interpreter ./node_modules/.bin/babel-node --attach",
+    "stop": "pm2 stop react-redux-hapi-fullstack-starter",
+    "webpack": "webpack -wd",
+    "test": "jest --watch"
+  },
+  "babel": {
+    "presets": [
+      "react",
+      "env",
+      "stage-2"
+    ]
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/src/**/*.{js,jsx}"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": -10
+      }
+    },
+    "globals": {
+      "year": 2017
+    },
+    "testMatch": [
+      "**/tests/**/*.js?(x)"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sachinjha1/twitter-query-engine.git"
+  },
+  "author": "Sachin Jha",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sachinjha1/twitter-query-engine/issues"
+  },
+  "homepage": "https://github.com/sachinjha1/twitter-query-engine#readme",
+  "devDependencies": {
+    "babel-eslint": "^8.0.2",
+    "eslint": "^4.11.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.5.0",
+    "jest": "^21.2.1",
+    "react-test-renderer": "^16.1.1"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "es6-promise": "^4.1.1",
+    "event-source-polyfill": "0.0.12",
+    "eventsource": "^1.0.5",
+    "handlebars": "^4.0.11",
+    "hapi": "^17.x.x",
+    "inert": "^5.0.1",
+    "isomorphic-fetch": "^2.2.1",
+    "material-ui": "^1.0.0-beta.21",
+    "material-ui-icons": "^1.0.0-beta.17",
+    "mongoose": "^4.13.6",
+    "pm2": "^2.7.2",
+    "prop-types": "^15.6.0",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "react-redux": "^5.0.6",
+    "react-router-config": "^1.0.0-beta.4",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "susie": "^3.0.0",
+    "vision": "^5.2.0",
+    "webpack": "^3.8.1"
+  }
+}
