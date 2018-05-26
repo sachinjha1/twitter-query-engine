@@ -29,7 +29,7 @@ class TweetsSearch extends React.Component {
 }
 
 const searchTweets = async (dispatch) => {
-  let hostUrl = '/api/tweets';
+  let hostUrl = '/api/netflix/tweets';
   if (typeof window === 'undefined') {
     hostUrl = `http://0.0.0.0:${Config.port}/api/tweets`;
   }
@@ -38,6 +38,7 @@ const searchTweets = async (dispatch) => {
 
   source.addEventListener('tweetevent', function (message) {
     console.log('Stream connection getting data!');
+    console.log('hello message-'+message);
     var data = JSON.parse(message.data);
     dispatch(setTweets({...data, id:message.lastEventId}));
   });
@@ -50,6 +51,29 @@ const searchTweets = async (dispatch) => {
     console.log('Stream connection is closed!');
     this.close();
   });
+
+  //Twitter stream
+  /**
+
+  var source = new EventSource("https://tweet-service.herokuapp.com/stream");
+
+  source.addEventListener('message', function (message) {
+    console.log('Stream connection getting data!');
+    console.log('hello message-'+message);
+    var data = JSON.parse(message.data);
+    dispatch(setTweets({...data, id:message.lastEventId}));
+  });
+
+  source.addEventListener('open', function (message) {
+    console.log('Stream connection is open!');
+  });
+
+  source.addEventListener('end', function (message) {
+    console.log('Stream connection is closed!');
+    this.close();
+  });
+  **/
+  //Twitter stream
 
 };
 

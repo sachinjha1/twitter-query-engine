@@ -13,7 +13,6 @@ const Handlers = [{
 
     const stream = new PassThrough({ objectMode: true });
 
-
     setInterval(() => {
 
       stream.write({ "tweet": Math.floor(Math.random() * 200)+'orange is the new black cool. #bingewatching', "user": "user-79", "retweet_count": 724, created_at: 1527250665254, verified: true, lang: "es"});
