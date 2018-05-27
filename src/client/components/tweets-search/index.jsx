@@ -62,7 +62,7 @@ const searchTweets = async (dispatch, query) => {
       let data = JSON.parse(message.data);
       dispatch(setTweets({...data, id: message.lastEventId}));
     }else{
-      source.close();
+      this.close();
       dispatch(reloadTweets(true));
     }
 
