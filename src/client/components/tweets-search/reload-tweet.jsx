@@ -1,11 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from "material-ui/Button";
+import Button from "@material-ui/core/Button";
+import { withStyles } from '@material-ui/core/styles';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 
-const ReloadTweet = ({_reloadTweets, _searchTweets, _query}) => {
+const styles = theme => ({
+  snackbar: {
+    margin: theme.spacing.unit,
+  },
+});
+
+
+const ReloadTweet = ({_reloadTweets, _searchTweets, _query, classes}) => {
   if(_reloadTweets){
     return <div>
       <Button color="primary" onClick={() => _searchTweets(_query)}>Reload</Button>
+      <SnackbarContent className={classes.snackbar} message="Continue loading...?" action={<Button color="secondary" onClick={() => _searchTweets(_query)}>Continue</Button>} />
     </div>;
   }else{
     return <div/>;
@@ -22,4 +32,4 @@ ReloadTweet.propTypes = {
   }),
 };
 
-export default ReloadTweet;
+export default withStyles(styles)(ReloadTweet);

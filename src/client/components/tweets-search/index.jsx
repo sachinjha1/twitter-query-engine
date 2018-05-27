@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import EventSource from 'eventsource';
+import Divider from '@material-ui/core/Divider';
 import TweetList from './tweet-list';
 import TweetQuery from './tweet-query';
 import ReloadTweets from './reload-tweet';
@@ -23,6 +24,7 @@ class TweetsSearch extends React.Component {
                     _searchTweets={this.props.searchTweets}
                     _query={this.props.query}
         />
+        <Divider style={{width:650}}/>
         <ReloadTweets _reloadTweets={this.props.reloadTweets}
                       _searchTweets={this.props.searchTweets}
                       _query={this.props.query}/>
@@ -57,7 +59,7 @@ const searchTweets = async (dispatch, query) => {
     console.log('Stream connection getting data!');
 
     tweetCount++;
-    if(tweetCount<=10){
+    if(tweetCount<=20){
       let data = JSON.parse(message.data);
       dispatch(setTweets({...data, id: message.lastEventId}));
     }else{

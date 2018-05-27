@@ -2,8 +2,8 @@ export default {
   counter: 0,
   movies: [],
   query:{
-    field: '',
-    operator: '',
+    field: 'tweet',
+    operator: 'equals',
     value: '',
   },
   tweets:[],
