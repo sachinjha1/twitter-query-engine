@@ -5,7 +5,6 @@ import EventSource from 'eventsource';
 import TweetList from './tweet-list';
 import TweetQuery from './tweet-query';
 import ReloadTweets from './reload-tweet';
-import Button from "material-ui/Button";
 import {
   setTweets, reloadTweets, clearTweets, setTweetsQueryField, setTweetsQueryOperator,
   setTweetsQueryValue
