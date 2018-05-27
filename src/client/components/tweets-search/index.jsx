@@ -45,7 +45,8 @@ const searchTweets = async (dispatch, query) => {
   dispatch(clearTweets());
   dispatch(setStreamStatus('Started'));
   tweetCount=0;
-  let hostUrl = `/api/netflix/tweets?field=${query.field}&operator=${query.operator}&value=${query.value}`;
+  let encodedQueryValue = encodeURIComponent(query.value);
+  let hostUrl = `/api/netflix/tweets?field=${query.field}&operator=${query.operator}&value=${encodedQueryValue}`;
   //let hostUrl = `/api/tweets`;
   if (typeof window === 'undefined') {
     hostUrl = `http://0.0.0.0:${Config.port}/api/tweets`;

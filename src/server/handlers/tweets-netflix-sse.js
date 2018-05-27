@@ -2,7 +2,7 @@ import tweet from '../../client/api/test-data-tweets.json';
 import EventSource from 'eventsource';
 import { PassThrough } from 'stream';
 
-var source;
+let source;
 
 const Handlers = [{
   method: 'GET',
@@ -25,10 +25,24 @@ const Handlers = [{
     }
 
     source.addEventListener('message', function (message) {
-      var data = JSON.parse(message.data);
-      if(data.tweet.includes(request.query.value)) {
-        stream.write({...data, id: message.lastEventId});
+      let data = JSON.parse(message.data);
+      let {field, operator, value} = request.query;
+
+      if(operator==='equals'){
+        let fieldStr = data[field].toString();
+        if((fieldStr.length===value.length) && fieldStr.search(new RegExp(value, "i"))===0) {
+          stream.write({...data, id: message.lastEventId});
+        }
+      }else if(operator==='contains' || operator==='regex'){
+        //Todo: If user enters regex like input for conatains operator then it will still be treated like regex.
+        //Need to fix it.
+        let fieldStr = data[field].toString();
+        if(fieldStr.search(new RegExp(value, "i"))>=0) {
+          stream.write({...data, id: message.lastEventId});
+        }
       }
+
+
     });
 
     return reply.event(stream, null, { event: 'tweetevent' });
