@@ -20,7 +20,7 @@ export function clearTweets() {
   return { type: types.CLEAR_TWEETS };
 }
 
-export function reloadTweets(reloadTweets) {
-  return { type: types.RELOAD_TWEETS, reloadTweets};
+export function setStreamStatus(streamStatus) {
+  return { type: types.SET_STREAM_STATUS, streamStatus};
 }
 

@@ -7,5 +7,5 @@ export default {
     value: '',
   },
   tweets:[],
-  reloadTweets: false,
+  streamStatus: 'NotStarted',
 };

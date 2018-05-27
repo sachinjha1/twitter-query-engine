@@ -132,7 +132,7 @@ const TweetQuery = ({_setTweetsQueryField, _setTweetsQueryOperator, _setTweetsQu
     />
 
     </form>
-    <Button variant="raised" color="primary" className={classes.button} onClick={() => _searchTweets(_query)}>Search</Button>
+    <Button variant="raised" color="primary" className={classes.button} onClick={() => _searchTweets(_query)}>Start Streaming</Button>
    </div>
 );
 

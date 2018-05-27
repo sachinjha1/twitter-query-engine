@@ -5,9 +5,9 @@ import EventSource from 'eventsource';
 import Divider from '@material-ui/core/Divider';
 import TweetList from './tweet-list';
 import TweetQuery from './tweet-query';
-import ReloadTweets from './reload-tweet';
+import StreamProgress from './stream-progress';
 import {
-  setTweets, reloadTweets, clearTweets, setTweetsQueryField, setTweetsQueryOperator,
+  setTweets, setStreamStatus, clearTweets, setTweetsQueryField, setTweetsQueryOperator,
   setTweetsQueryValue
 } from '../../actions/tweets'
 import Config from '../../../../config/development';
@@ -25,7 +25,7 @@ class TweetsSearch extends React.Component {
                     _query={this.props.query}
         />
         <Divider style={{width:650}}/>
-        <ReloadTweets _reloadTweets={this.props.reloadTweets}
+        <StreamProgress _reloadTweets={this.props.streamStatus}
                       _searchTweets={this.props.searchTweets}
                       _query={this.props.query}/>
 
@@ -41,7 +41,7 @@ let tweetCount;
 const searchTweets = async (dispatch, query) => {
   console.log('SearchTweets');
   dispatch(clearTweets());
-  dispatch(reloadTweets(false));
+  dispatch(setStreamStatus('Started'));
   tweetCount=0;
   let hostUrl = `/api/netflix/tweets?field=${query.field}&operator=${query.operator}&value=${query.value}`;
   //let hostUrl = `/api/tweets`;
@@ -64,7 +64,7 @@ const searchTweets = async (dispatch, query) => {
       dispatch(setTweets({...data, id: message.lastEventId}));
     }else{
       this.close();
-      dispatch(reloadTweets(true));
+      dispatch(setStreamStatus('Stopped'));
     }
 
   });
@@ -83,7 +83,7 @@ const searchTweets = async (dispatch, query) => {
 
 TweetsSearch.propTypes = {
   tweets: PropTypes.array.isRequired,
-  reloadTweets: PropTypes.bool,
+  streamStatus: PropTypes.bool,
   query: PropTypes.shape({
     field: PropTypes.string,
     operator: PropTypes.string,
@@ -99,7 +99,7 @@ function mapStateToProps(state) {
   return {
     tweets: state.tweets,
     query: state.query,
-    reloadTweets: state.reloadTweets,
+    streamStatus: state.streamStatus,
   };
 }
 
