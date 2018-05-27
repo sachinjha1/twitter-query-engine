@@ -1,8 +1,4 @@
-import tweet from '../../client/api/test-data-tweets.json';
-import EventSource from 'eventsource';
 import { PassThrough } from 'stream';
-
-var sse_conns = [];
 
 const Handlers = [{
   method: 'GET',

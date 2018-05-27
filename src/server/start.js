@@ -7,7 +7,6 @@ import { polyfill } from 'es6-promise';
 import 'isomorphic-fetch';
 import { host, port, nodeEnv } from '../../config/development';
 import Routes from './handlers/';
-import mongodbSetup from './databases/mongodb';
 
 polyfill();
 process.env.NODE_ENV = nodeEnv;
@@ -33,8 +32,6 @@ const provision = async () => {
 };
 
 provision().then(() => {
-  //mongodbSetup();
-
   /* eslint-disable no-console */
   console.log(`Server started at port ${server.info.uri} NODE_ENV = ${process.env.NODE_ENV}`);
 }, (err) => {

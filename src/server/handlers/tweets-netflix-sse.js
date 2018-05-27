@@ -1,4 +1,3 @@
-import tweet from '../../client/api/test-data-tweets.json';
 import EventSource from 'eventsource';
 import { PassThrough } from 'stream';
 
