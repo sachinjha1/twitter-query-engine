@@ -4,7 +4,23 @@ export function setTweets(tweets) {
   return { type: types.SET_TWEETS, tweets };
 }
 
-export function setTweetsQuery(query) {
-  return { type: types.SET_TWEETS_QUERY, query };
+export function setTweetsQueryField(field) {
+  return { type: types.SET_TWEETS_QUERY_FIELD, field };
+}
+
+export function setTweetsQueryOperator(operator) {
+  return { type: types.SET_TWEETS_QUERY_OPERATOR, operator };
+}
+
+export function setTweetsQueryValue(value) {
+  return { type: types.SET_TWEETS_QUERY_VALUE, value };
+}
+
+export function clearTweets() {
+  return { type: types.CLEAR_TWEETS };
+}
+
+export function reloadTweets(reloadTweets) {
+  return { type: types.RELOAD_TWEETS, reloadTweets};
 }
 

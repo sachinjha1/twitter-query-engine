@@ -1,6 +1,11 @@
 export default {
   counter: 0,
   movies: [],
-  query:'',
+  query:{
+    field: '',
+    operator: '',
+    value: '',
+  },
   tweets:[],
+  reloadTweets: false,
 };
