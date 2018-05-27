@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextField from "material-ui/TextField";
-import Button from "material-ui/Button";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 const TweetQuery = ({_setTweetsQueryField, _setTweetsQueryOperator, _setTweetsQueryValue, _searchTweets, _query}) => (
   <div>
