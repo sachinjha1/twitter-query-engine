@@ -83,7 +83,7 @@ const searchTweets = async (dispatch, query) => {
 
 TweetsSearch.propTypes = {
   tweets: PropTypes.array.isRequired,
-  streamStatus: PropTypes.bool,
+  streamStatus: PropTypes.string,
   query: PropTypes.shape({
     field: PropTypes.string,
     operator: PropTypes.string,
