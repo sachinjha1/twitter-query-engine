@@ -19,7 +19,7 @@ const StreamProgress = ({_reloadTweets, _searchTweets, _query, classes}) => {
   if(_reloadTweets==='Stopped'){
     return <div>
       <SnackbarContent className={classes.snackbar}
-                       message="Continue loading...?"
+                       message="Receiving more than 2 tweets per sec. Adjust search criteria or continue loading."
                        action={<Button color="secondary" onClick={() => _searchTweets(_query)}>Continue</Button>} />
     </div>;
   }else if(_reloadTweets==='Started'){

@@ -37,9 +37,11 @@ class TweetsSearch extends React.Component {
 
 let source;
 let tweetCount;
+let startTS;
 
 const searchTweets = async (dispatch, query) => {
   console.log('SearchTweets');
+  startTS=new Date();
   dispatch(clearTweets());
   dispatch(setStreamStatus('Started'));
   tweetCount=0;
@@ -59,7 +61,11 @@ const searchTweets = async (dispatch, query) => {
     console.log('Stream connection getting data!');
 
     tweetCount++;
-    if(tweetCount<=20){
+    let timeDiff = Math.abs(new Date()-startTS);
+    let tweetsPerSec = tweetCount/Math.ceil(timeDiff/1000);
+    console.log(tweetsPerSec);
+    //If streaming is faster than 2 per sec and number of captured tweets is 20 then stop the streaming
+    if(tweetCount<=20 || tweetsPerSec < 2){
       let data = JSON.parse(message.data);
       dispatch(setTweets({...data, id: message.lastEventId}));
     }else{
