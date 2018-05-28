@@ -1,7 +1,7 @@
-import TweetsNetflixHandlers from './tweets-netflix-sse';
+import TweetsSSE from './tweets-sse';
 import RootSSRHandlers from './root-ssr';
 import RootPublicHandlers from './root-public';
 
-const Routes = [...TweetsNetflixHandlers, ...RootSSRHandlers, ...RootPublicHandlers];
+const Routes = [...TweetsSSE, ...RootSSRHandlers, ...RootPublicHandlers];
 
 export default Routes;
