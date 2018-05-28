@@ -3,7 +3,7 @@ import TweetsSearchPage from '../components/tweets-search';
 const routes = [
   {
     ...TweetsSearchPage,
-    path:'/tweets',
+    path:'/',
     exact: true,
   },
 ];
