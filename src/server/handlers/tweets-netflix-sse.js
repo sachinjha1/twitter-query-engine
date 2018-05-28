@@ -1,17 +1,19 @@
 import EventSource from 'eventsource';
 import { PassThrough } from 'stream';
+import { tweetStreamUrl } from '../../../config';
+import { OPERATORS_EQUAL, OPERATORS_CONTAINS, OPERATORS_REGEX, MIDDLEWARE_SSE_EVENT_NAME } from '../../shared';
 
+//Event source for calling twitter-service firehose
 let source;
 
 const Handlers = [{
   method: 'GET',
-  path: '/api/netflix/tweets',
+  path: '/api/tweet/stream',
   handler: (request, reply) => {
-    console.log(request.query);
     const stream = new PassThrough({ objectMode: true });
-
+    //avoid multiple creation of EventSource
     if(!source){
-      source = new EventSource("https://tweet-service.herokuapp.com/stream");
+      source = new EventSource(tweetStreamUrl);
 
       source.addEventListener('open', function (message) {
         console.log('Firehose connection is open!');
@@ -27,12 +29,12 @@ const Handlers = [{
       let data = JSON.parse(message.data);
       let {field, operator, value} = request.query;
 
-      if(operator==='equals'){
+      if(operator===OPERATORS_EQUAL){
         let fieldStr = data[field].toString();
         if((fieldStr.length===value.length) && fieldStr.search(new RegExp(value, "i"))===0) {
           stream.write({...data, id: message.lastEventId});
         }
-      }else if(operator==='contains' || operator==='regex'){
+      }else if(operator===OPERATORS_CONTAINS || operator===OPERATORS_REGEX){
         //Todo: If user enters regex like input for conatains operator then it will still be treated like regex.
         //Need to fix it.
         let fieldStr = data[field].toString();
@@ -44,7 +46,7 @@ const Handlers = [{
 
     });
 
-    return reply.event(stream, null, { event: 'tweetevent' });
+    return reply.event(stream, null, { event: MIDDLEWARE_SSE_EVENT_NAME });
   },
 }];
 

@@ -1,5 +1,5 @@
 import { matchRoutes } from 'react-router-config';
-import { title } from '../../../config/development';
+import { title } from '../../../config';
 import Routes from '../../client/routes/index';
 import serverRenderer from '../renderer/server';
 import configureStore from '../../client/store/server-configure';

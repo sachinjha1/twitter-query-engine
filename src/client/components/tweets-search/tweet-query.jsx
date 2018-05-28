@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { OPTIONS_FIELDS, OPTIONS_OPERATORS } from '../../constants';
 
 const styles = theme => ({
   container: {
@@ -23,47 +24,6 @@ const styles = theme => ({
 });
 
 
-const FIELDS = [
-  {
-    value: 'tweet',
-    label: 'Tweet',
-  },
-  {
-    value: 'user',
-    label: 'User',
-  },
-  {
-    value: 'retweet_count',
-    label: 'Retweet Count',
-  },
-  {
-    value: 'created_at',
-    label: 'Created At',
-  },
-  {
-    value: 'verified',
-    label: 'Verified',
-  },
-  {
-    value: 'lang',
-    label: 'Language',
-  },
-];
-
-const OPERATORS = [
-  {
-    value: 'equals',
-    label: 'Equals',
-  },
-  {
-    value: 'contains',
-    label: 'Contains (case insensitive)',
-  },
-  {
-    value: 'regex',
-    label: 'Regex',
-  },
-];
 const TweetQuery = ({_setTweetsQueryField, _setTweetsQueryOperator, _setTweetsQueryValue, _searchTweets, _query, classes}) => (
   <div>
   <form className={classes.container} noValidate autoComplete="off">
@@ -85,7 +45,7 @@ const TweetQuery = ({_setTweetsQueryField, _setTweetsQueryOperator, _setTweetsQu
       helperText="Please select your field type"
       margin="normal"
     >
-      {FIELDS.map(option => (
+      {OPTIONS_FIELDS.map(option => (
         <option key={option.value} value={option.value}>
           {option.label}
         </option>
@@ -109,7 +69,7 @@ const TweetQuery = ({_setTweetsQueryField, _setTweetsQueryOperator, _setTweetsQu
       helperText="Please select your operator type"
       margin="normal"
     >
-      {OPERATORS.map(option => (
+      {OPTIONS_OPERATORS.map(option => (
         <option key={option.value} value={option.value}>
           {option.label}
         </option>
@@ -133,11 +93,15 @@ const TweetQuery = ({_setTweetsQueryField, _setTweetsQueryOperator, _setTweetsQu
 );
 
 TweetQuery.propTypes = {
-  query: PropTypes.shape({
+  _query: PropTypes.shape({
     field: PropTypes.string,
     operator: PropTypes.string,
     value: PropTypes.string,
   }),
+  _setTweetsQueryField: PropTypes.func,
+  _setTweetsQueryOperator: PropTypes.func,
+  _setTweetsQueryValue: PropTypes.func,
+  _searchTweets: PropTypes.func,
 };
 
 export default withStyles(styles)(TweetQuery);

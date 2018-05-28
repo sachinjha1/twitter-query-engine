@@ -5,7 +5,7 @@ import Susie from 'susie';
 import Handlebars from 'handlebars';
 import { polyfill } from 'es6-promise';
 import 'isomorphic-fetch';
-import { host, port, nodeEnv } from '../../config/development';
+import { host, port, nodeEnv } from '../../config';
 import Routes from './handlers/';
 
 polyfill();

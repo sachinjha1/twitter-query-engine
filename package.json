@@ -18,15 +18,15 @@
     "design",
     "twitter",
     "streaming",
-    "socke.io"
+    "sse"
   ],
   "engines": {
     "node": "8.x",
     "npm": ">= 5"
   },
   "scripts": {
-    "start": "pm2 start src/server/start.js --name react-redux-hapi-fullstack-starter --watch --interpreter ./node_modules/.bin/babel-node --attach",
-    "stop": "pm2 stop react-redux-hapi-fullstack-starter",
+    "dev": "nodemon ./node_modules/.bin/babel-node src/server/start.js",
+    "start": "./node_modules/.bin/babel-node src/server/start.js",
     "webpack": "webpack -wd",
     "test": "jest --watch"
   },
@@ -50,9 +50,6 @@
         "statements": -10
       }
     },
-    "globals": {
-      "year": 2017
-    },
     "testMatch": [
       "**/tests/**/*.js?(x)"
     ]
@@ -75,6 +72,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.5.0",
     "jest": "^21.2.1",
+    "nodemon": "^1.17.5",
     "react-test-renderer": "^16.1.1"
   },
   "dependencies": {
@@ -93,8 +91,6 @@
     "hapi": "^17.x.x",
     "inert": "^5.0.1",
     "isomorphic-fetch": "^2.2.1",
-    "mongoose": "^4.13.6",
-    "pm2": "^2.7.2",
     "prop-types": "^15.6.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",

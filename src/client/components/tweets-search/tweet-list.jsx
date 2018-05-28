@@ -7,10 +7,7 @@ const TweetList = ({ tweets }) => (
 );
 
 TweetList.propTypes = {
-  tweets: PropTypes.arrayOf(PropTypes.shape({
-    tweet: PropTypes.string,
-    user: PropTypes.string,
-  })).isRequired,
+  tweets: PropTypes.array.isRequired,
 };
 
 export default TweetList;

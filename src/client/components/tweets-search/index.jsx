@@ -10,8 +10,9 @@ import {
   setTweets, setStreamStatus, clearTweets, setTweetsQueryField, setTweetsQueryOperator,
   setTweetsQueryValue
 } from '../../actions/tweets'
-import Config from '../../../../config/development';
-
+import { host, port } from '../../../../config';
+import { MIDDLEWARE_SSE_EVENT_NAME } from '../../../shared';
+import { STREAM_STATUS_STARTED, STREAM_STATUS_STOPPED, MAX_TWEETS_TO_LOAD, TWEET_SPEED_THRESHOLD } from '../../constants';
 
 class TweetsSearch extends React.Component {
   render() {
@@ -25,7 +26,7 @@ class TweetsSearch extends React.Component {
                     _query={this.props.query}
         />
         <Divider style={{width:650}}/>
-        <StreamProgress _reloadTweets={this.props.streamStatus}
+        <StreamProgress _streamStatus={this.props.streamStatus}
                       _searchTweets={this.props.searchTweets}
                       _query={this.props.query}/>
 
@@ -40,16 +41,20 @@ let tweetCount;
 let startTS;
 
 const searchTweets = async (dispatch, query) => {
-  console.log('SearchTweets');
+  //Start Timer to capture Tweets per second speed
   startTS=new Date();
+  //Clear all existing tweets from UI
   dispatch(clearTweets());
-  dispatch(setStreamStatus('Started'));
+  //Mark stream status as started so that progress bar can be shown
+  dispatch(setStreamStatus(STREAM_STATUS_STARTED));
+  //Tweet counter starts
   tweetCount=0;
-  let encodedQueryValue = encodeURIComponent(query.value);
-  let hostUrl = `/api/netflix/tweets?field=${query.field}&operator=${query.operator}&value=${encodedQueryValue}`;
-  //let hostUrl = `/api/tweets`;
+
+  //URL for browser
+  let hostUrl = `/api/tweet/stream?field=${query.field}&operator=${query.operator}&value=${encodeURIComponent(query.value)}`;
   if (typeof window === 'undefined') {
-    hostUrl = `http://0.0.0.0:${Config.port}/api/tweets`;
+    //URL to use from NodeJS client (Server Side rendering)
+    hostUrl = `http://${host}:${port}${hostUrl}`;
   }
 
   //If reclicked... close the existing SSE connection
@@ -58,30 +63,25 @@ const searchTweets = async (dispatch, query) => {
   }
   source = new EventSource(hostUrl);
 
-  source.addEventListener('tweetevent', function (message) {
-    console.log('Stream connection getting data!');
-
+  source.addEventListener(MIDDLEWARE_SSE_EVENT_NAME, function (message) {
     tweetCount++;
     let timeDiff = Math.abs(new Date()-startTS);
     let tweetsPerSec = tweetCount/Math.ceil(timeDiff/1000);
-    console.log(tweetsPerSec);
     //If streaming is faster than 2 per sec and number of captured tweets is 20 then stop the streaming
-    if(tweetCount<=20 || tweetsPerSec < 2){
+    if(tweetCount<=MAX_TWEETS_TO_LOAD || tweetsPerSec < TWEET_SPEED_THRESHOLD){
       let data = JSON.parse(message.data);
       dispatch(setTweets({...data, id: message.lastEventId}));
     }else{
       this.close();
-      dispatch(setStreamStatus('Stopped'));
+      dispatch(setStreamStatus(STREAM_STATUS_STOPPED));
     }
 
   });
 
   source.addEventListener('open', function (message) {
-    console.log('Stream connection is open!');
   });
 
   source.addEventListener('end', function (message) {
-    console.log('Stream connection is closed!');
     this.close();
   });
 
