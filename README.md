@@ -18,3 +18,10 @@ Key implementation pending:
 2. Support multiple query feature in UI
 3. UX changes based on customer's need
 
+
+How to run it locally
+1. Go to terminal and clone code from github ```git clone https://github.com/sachinjha1/twitter-query-engine.git```
+2. Change directory to project folder ```cd twitter-query-engine```
+3. Run npm install ```npm install```
+4. Start local server ```npm start```
+5. Open browser and go to ```http://localhost:8080/```
