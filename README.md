@@ -53,5 +53,7 @@ In case of any local code change
      B.) Streaming not allowed in network (was not working in my employer's network)
      C.) No support fot SSE in some browsers (Edge, IE etc)
      
- 6. Lot of requirement clarification by talking to product owner.    
+ 6. Lot of requirement clarification by talking to product owner. 
+ 
+ 7. Securing middleware stream api and UI.
  
