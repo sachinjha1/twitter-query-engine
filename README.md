@@ -35,3 +35,23 @@ In case of any local code change
  
  ### Screenshot
  ![Home screen](./docs/app-home-screen.png)
+ 
+ ### Areas of improvement
+ 
+ 1. Adding test cases.
+ 
+ 2. Handling faster stream result
+    Step A) Persist in server side for each client stream and keep most upto date message on top (merge same message with diff tweet count)
+    Step B) Make Stream come slower so that UI does not freeze and new tweets are more readable. Web Workers can also be researched
+ 
+ 3. Adding multiple filter criteria for streams. Right now only one is allowed.
+ 
+ 4. Adding validation for fields. For e.g. Required validation for value etc
+ 
+ 5. Handling error scenarios like 
+     A.) Twitter stream api is not available.
+     B.) Streaming not allowed in network (was not working in my employer's network)
+     C.) No support fot SSE in some browsers (Edge, IE etc)
+     
+ 6. Lot of requirement clarification by talking to product owner.    
+ 
